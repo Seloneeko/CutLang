@@ -2,7 +2,6 @@
 #include "lhco.h"
 #include "atlasopen.h"
 #include "atlasopenR2.h"
-#include "atlasopenV3.h"
 #include "cmsod.h"
 #include "cmsod2.h"
 #include "delphes.h"
@@ -55,7 +54,6 @@ int main(int argc, char*argv[])
  bool use_delphes=false;
  bool use_atlasod=false;
  bool use_atlasodR2=false;
- bool use_atlasodV3=false;
  bool use_atlmin=false;
  bool use_atltrt=false;
  bool use_cmsod=false;
@@ -109,7 +107,7 @@ for (int i = 2; i < argc; i++) {
  if (aselect.BPcount+aselect.Dumpcount < 1) {
   	     std::cout << "No analysis is set to run. Please set at least one.\n";
              std::cout << argv[0] << " filename.root \n"
-                       << " [-inp LVL0 | DELPHES2 | LHCO | FCC | DELPHES | POET | ATLTRT | ATLMIN | ATLASOD | ATLASODR2 | ATLASODV3 | CMSOD | CMSODR2 | CMSNANO | VLLF | VLLT]\n"
+                       << " [-inp LVL0 | DELPHES2 | LHCO | FCC | DELPHES | POET | ATLTRT | ATLMIN | ATLASOD | ATLASODR2 | CMSOD | CMSODR2 | CMSNANO | VLLF | VLLT]\n"
                        << " [-BP #] [-D 1|0] [-P ] \n"
                        << " [-Q 1|0] [-HF 1|0] [-S 1|0] \n"
                        << " [-EVT #] [-UN userName] [-V v_freq] \n"  ;
@@ -126,7 +124,6 @@ for (int i = 2; i < argc; i++) {
  else if (inptype == "ATLTRT")  { use_atltrt =true;}
  else if (inptype == "ATLASOD") { use_atlasod =true;}
  else if (inptype == "ATLASODR2") { use_atlasodR2 =true;}
- else if (inptype == "ATLASODV3") { use_atlasodV3 =true;}
  else if (inptype == "CMSOD")   { use_cmsod =true;}
  else if (inptype == "CMSODR2") { use_cmsodR2 =true;}
  else if (inptype == "CMSNANO") { use_cmsnano =true;}
@@ -186,9 +183,6 @@ for (int i = 2; i < argc; i++) {
   }else if (use_atlasodR2){
    cout << "~Now using ATLAS Open Data R2 files.~~~~~~ beta!\n";
    leafname="mini";
-  }else if (use_atlasodV3){
-   cout << "~Now using ATLAS Open Data V3 files.~~~~~~ beta!\n";
-   leafname="analysis";
   }else if (use_atlmin){
    cout << "~Now using ATLAS Mini NTUPLE files.~~~~~~ alpha!\n";
    leafname="nominal";
@@ -271,9 +265,6 @@ for (int i = 2; i < argc; i++) {
                atlasoda->Loop(aselect, username);
    } else if (use_atlasodR2){
     atlasopenR2 *atlasoda=new atlasopenR2((char*)xxx.c_str(),chain);
-               atlasoda->Loop(aselect, username);
-   } else if (use_atlasodV3){
-    atlasopenV3 *atlasoda=new atlasopenV3((char*)xxx.c_str(),chain);
                atlasoda->Loop(aselect, username);
   } else if (use_atlmin){
     AtlMin *atlmina=new AtlMin((char*)xxx.c_str(),chain);
